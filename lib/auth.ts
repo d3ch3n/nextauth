@@ -1,13 +1,14 @@
 import { NextAuthOptions } from "next-auth";
 import  CredentialProvider  from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { db } from "@/lib/adapterPrisma";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+//import { db } from "@/lib/adapterPrisma";
 import { db as prisma} from "@/lib/adapterPrisma";
 import bcrypt from "bcrypt";
 import { signJwtAccessToken } from "./jwt";
 
+
 export const authOptions : NextAuthOptions = {
-    adapter: PrismaAdapter(db as any),
+    adapter: PrismaAdapter(prisma as any),
     session:{
       strategy: 'jwt',
       maxAge: 60 * 60 * 12,
