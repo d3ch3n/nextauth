@@ -35,12 +35,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
     const body:RequestBody = await request.json();
 
-    if(params.id !== '1' )
-    {
-
         const getUser = await prisma.user.findUnique({
             where: {
-                id: parseInt(params.id),
+                id: params.id,
             },
         });
 
@@ -51,7 +48,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
             if(getUser){
                 const updateUser = await prisma.user.update({
                     where:{
-                        id: parseInt(params.id),
+                        id: params.id,
                     },
                     data: {
                         email: body.username,
@@ -71,12 +68,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
             if(getUser){
                 const updateUser = await prisma.user.update({
                     where:{
-                        id: parseInt(params.id),
+                        id: params.id,
                     },
                     data: {
                         email: body.username,
                         name: body.name.toUpperCase(),
-                        password: await bcrypt.hash(body.password,10), 
+                        hashPassword: await bcrypt.hash(body.password,10), 
                         admin: body.admin,
                     },
                 });
@@ -86,12 +83,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
                 return NextResponse.json({ user: "With id: " + params.id + " was not found" }, { status: 200 });
             }   
         }
-
-    }
-    
-   return NextResponse.json({ user: "With id: " + params.id + " can't be updated" }, { status: 200 });
 }
-
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
     const accessToken = request.headers.get("authorization")
     if(!accessToken || !verifyJwt(accessToken)){
@@ -102,14 +94,14 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     {
         const getUser = await prisma.user.findUnique({
             where: {
-                id: parseInt(params.id),
+                id: params.id,
             },
         });
 
         if(getUser){
             const deleteCustomer = await prisma.user.delete({
                 where: {
-                    id: parseInt(params.id),
+                    id: params.id,
                 },
             });
 
