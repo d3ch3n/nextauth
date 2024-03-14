@@ -11,16 +11,20 @@ import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 
-interface userAuthFormProps extends React.HTMLAttributes<HTMLDivElement>{}
+
 
 interface IUser {
     email: string
     password: string
 }
+interface userAuthFormProps extends React.HTMLAttributes<HTMLDivElement>{
+    className: string;
+    buttonLabel: string;
+}
 
 export function UserAuthForm({
-    className, ...props
-}: userAuthFormProps){
+    className, buttonLabel, ...props
+}: userAuthFormProps ){
     const { toast }  = useToast()
     const router = useRouter()
     const [data, setData] = useState<IUser>({
@@ -110,7 +114,7 @@ export function UserAuthForm({
                             {isLoading && (
                                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                             )}
-                            Entrar
+                            {buttonLabel}
                         </Button>
 
                     </div>

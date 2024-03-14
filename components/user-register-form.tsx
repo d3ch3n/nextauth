@@ -14,7 +14,10 @@ import { useRouter } from "next/navigation";
 
 
 
-interface userAuthFormProps extends React.HTMLAttributes<HTMLDivElement>{}
+interface userAuthFormProps extends React.HTMLAttributes<HTMLDivElement>{
+    className: string;
+    buttonLabel: string;
+}
 
 interface IUser {
     name: string,
@@ -24,7 +27,7 @@ interface IUser {
 }
 
 export function UserRegisterForm({
-    className, ...props
+    className, buttonLabel,...props
 }: userAuthFormProps){
     
     const { toast }  = useToast()
@@ -48,9 +51,9 @@ export function UserRegisterForm({
             },
             body: JSON.stringify(data)
         })
-        console.log(JSON.stringify(data))
+        //console.log(JSON.stringify(data))
         const response = await request.json();
-        console.log(request.ok)
+        //console.log(request.ok)
         if(!request.ok){
             toast({
                 title: "Oooops",
@@ -61,7 +64,7 @@ export function UserRegisterForm({
                 ),
             });
         }else{
-            console.log(response);
+            //console.log(response);
             router.push("/login")
         }
             
@@ -143,7 +146,7 @@ export function UserRegisterForm({
                             {isLoading && (
                                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                             )}
-                            Registrar
+                            {buttonLabel}
                         </Button>
 
                     </div>

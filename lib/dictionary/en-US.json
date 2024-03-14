@@ -1,0 +1,17 @@
+{
+    "Login": {
+      "SignIn": "SignIn",
+      "SignOut" : "SignOut",
+      "SignUp" : "SignUp",
+      "loginmessage": "Enter your email below to Signin",
+      "registermessage": "Enter your email below to Register",
+      "termsOfService1" : "By clicking continue, you agree to our",
+      "termsOfService2" : "Terms of Service ",
+      "termsOfService3" : "Privacy Policy. ",
+      "and": "and",
+      "heimdallMessage": "In the depths of ancient times, where myths weave the fabric of reality, stood the glorious realm of Asgard, ruled by powerful and majestic gods. Among the golden towers and eternal halls, Heimdall stood as an unwavering pillar of vigilance, the steadfast guardian of the gates of his beloved realm.",
+      "registerButtonLabel": "Register",
+      "loginButtonLabel": "Login"
+
+    }
+  }

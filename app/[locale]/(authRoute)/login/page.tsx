@@ -1,9 +1,10 @@
 import { Metadata } from "next"
-import Image from "next/image"
+//import Image from "next/image"
 import Link from "next/link"
+import {useTranslations} from 'next-intl';
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+//import { cn } from "@/lib/utils"
+//import { buttonVariants } from "@/components/ui/button"
 import { UserAuthForm } from "@/components/user-auth-form"
 import AuthButton from "@/components/authButton"
 
@@ -13,13 +14,14 @@ export const metadata: Metadata = {
 }
 
 export default function AuthenticationPage() {
+  const lang = useTranslations('Login')
   return (
     <>
       <div className="md:hidden">
        
       </div>
       <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <AuthButton page="login" ></AuthButton>
+        <AuthButton page="login" signInMessage={lang("SignIn")} signUpMessage={lang("SignUp")} signOutMessage={lang("SignOut")}/>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex items-center text-lg font-medium">
@@ -35,16 +37,13 @@ export default function AuthenticationPage() {
             >
               <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
             </svg>
-            Acme Inc
+            Heimdall
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
+                &ldquo;{lang("heimdallMessage")}.&rdquo;
               </p>
-              <footer className="text-sm">Sofia Davis</footer>
             </blockquote>
           </div>
         </div>
@@ -52,27 +51,27 @@ export default function AuthenticationPage() {
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                Signin
+              {lang("SignIn")}
               </h1>
               <p className="text-sm text-muted-foreground">
-                Enter your email below to Signin
+                {lang("loginmessage")}
               </p>
             </div>
-             <UserAuthForm />
+             <UserAuthForm className="" buttonLabel={lang("loginButtonLabel")}/>
             <p className="px-8 text-center text-sm text-muted-foreground">
-              By clicking continue, you agree to our{" "}
+              {lang("termsOfService1")}{" "}
               <Link
                 href="/terms"
                 className="underline underline-offset-4 hover:text-primary"
               >
-                Terms of Service
+                {lang("termsOfService2")}
               </Link>{" "}
-              and{" "}
+              {lang("and")}{" "}
               <Link
                 href="/privacy"
                 className="underline underline-offset-4 hover:text-primary"
               >
-                Privacy Policy
+                {lang("termsOfService3")}
               </Link>
               .
             </p>

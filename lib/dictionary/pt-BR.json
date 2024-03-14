@@ -1,0 +1,16 @@
+{
+    "Login": {
+      "SignIn": "Entrar",
+      "SignOut" : "Sair",
+      "SignUp" : "Cadastrar",
+      "loginmessage": "Insira seu email abaixo para entrar",
+      "registermessage": "Insira seu email abaixo para se registrar",
+      "termsOfService1" : "Ao continuar, você aceitará nosso ",
+      "termsOfService2" : "Termo de Serviço ",
+      "termsOfService3" : "Política de Privacidade. ",
+      "and": "e",
+      "heimdallMessage": "Nas profundezas dos tempos antigos, onde os mitos tecem o tecido da realidade, erguia-se o glorioso reino de Asgard, governado por deuses poderosos e majestosos. Entre as torres douradas e os salões eternos, Heimdall permanecia como um pilar de vigilância, o guardião inabalável dos portões de seu amado reino.",
+      "registerButtonLabel": "Registrar",
+      "loginButtonLabel": "Entrar"
+    }
+  }
