@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Customer{
+  id Int @id @default(autoincrement())
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+  CustomerName String @unique
+  Room Room[]
+}
+
+model Room{
+  id Int @id @default(autoincrement())
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+  RoomName String 
+  Customer Customer @relation(fields: [CustomerId], references: [id])
+  CustomerId Int
+  DevicesRoom DevicesRoom[]
+  Building Building @relation(fields: [BuildingId], references: [id])
+  BuildingId Int
+}
+model Building{
+  id Int @id @default(autoincrement())
+  CreatedAt DateTime @default(now())
+  BuildingName String @unique
+  BuildingAddress String
+  Room Room[]
+}
+
+model Manufacturer{
+  id Int @id @default(autoincrement())
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+  ManufacturerName String @unique
+  Device Device[]
+}
+
+model Device{
+  id Int @id @default(autoincrement())
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+  DeviceName String @unique
+  Manufacturer Manufacturer @relation(fields: [ManufacturerId], references: [id])
+  ManufacturerId Int
+  DevicesRoom DevicesRoom[]
+}
+
+model DevicesRoom{
+  id Int @id @default(autoincrement())
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+  Description String
+  Mandatory Boolean
+  Room Room @relation(fields: [RoomId], references: [id])
+  RoomId Int
+  Device Device @relation(fields: [DeviceId], references: [id])
+  DeviceId Int
+  DeviceModel String
+  DeviceManufacturerId Int
+  DeviceManufacturer String
+  Status Status[]
+}
+
+model Status{
+  id Int @id @default(autoincrement())
+  CreatedAt DateTime @default(now())
+  Status String
+  Custom1 String?
+  Custom2 String?
+  Custom3 String?
+  DevicesRoom DevicesRoom @relation(fields: [DevicesRoomId], references: [id])
+  DevicesRoomId Int
+}
+
+
+
+///Authentication
+
+model Account {
+  id                 String    @id @default(cuid())
+  userId             String
+  providerType       String
+  providerId         String
+  providerAccountId  String
+  refreshToken       String?
+  accessToken        String?
+  accessTokenExpires DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  user               User      @relation(fields: [userId], references: [id])
+
+  @@unique([providerId, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  accessToken  String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String   @unique
+  emailVerified DateTime?
+  image         String?
+  hashPassword  String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime?  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  admin         Boolean
+}
