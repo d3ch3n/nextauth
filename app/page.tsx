@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <>
     <div className="m-12">
-          <AuthButton page="login" ></AuthButton>
+          <AuthButton page="register" ></AuthButton>
     </div>
     <ClientSession></ClientSession>
     <ServerSession></ServerSession>
